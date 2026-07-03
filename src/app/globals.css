@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3efe8;
+  --background-strong: #141a1d;
+  --foreground: #161d22;
+  --surface: #e7dfd2;
+  --card: #faf7f2;
+  --line: #d2c7b7;
+  --line-strong: #475159;
+  --muted: #636a67;
+  --accent: #d06c32;
+  --accent-strong: #ad5523;
+  --accent-foreground: #111618;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-strong: var(--background-strong);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --animate-progress: progress 1.8s ease-out both;
+  --animate-marquee-right: marquee-right 34s linear infinite;
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0.55);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0))
+      no-repeat,
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+summary {
+  outline-color: var(--accent);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 25%, white);
+}
+
+@layer base {
+  body {
+    @apply text-base;
+  }
+
+  a {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+  }
+
+  button {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-kicker {
+    @apply font-mono text-xs text-muted uppercase;
+  }
+
+  .section-heading {
+    @apply mt-4 font-heading text-4xl font-semibold text-balance text-foreground sm:text-5xl;
+  }
+
+  .section-copy {
+    @apply mt-5 max-w-2xl text-base leading-8 text-muted text-pretty sm:text-lg;
+  }
+
+  .eyebrow {
+    @apply inline-flex rounded-full border border-line bg-card px-4 py-2 font-mono text-xs tracking-[0.18em] text-muted uppercase;
+  }
+
+  .technical-label {
+    @apply font-mono text-[11px] tracking-[0.2em] uppercase;
+  }
+
+  .technical-frame {
+    @apply font-mono text-[10px] uppercase tracking-[0.2em];
+  }
+
+  .technical-badge {
+    @apply inline-flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/6 font-mono text-[11px] uppercase tracking-[0.2em];
+  }
+
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(22, 29, 34, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22, 29, 34, 0.045) 1px, transparent 1px);
+    background-position: center;
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  .marquee-track {
+    width: max-content;
+    animation: marquee-right 34s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
